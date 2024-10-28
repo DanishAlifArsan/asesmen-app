@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:gravity="end"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tanggal"
+        style="@style/text.subtitle.white"
+        android:text="@string/tanggal"
+        android:paddingStart="?android:expandableListPreferredChildIndicatorLeft"
+        android:paddingEnd="?android:expandableListPreferredChildIndicatorRight"/>
+</LinearLayout>

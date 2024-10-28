@@ -103,15 +103,30 @@
         app:layout_constraintStart_toStartOf="parent"
         android:text="@string/tambah_penilaian"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/list_penilaian"
+        tools:visibility="visible" />
+
+    <ExpandableListView
+        android:id="@+id/list_penilaian"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
+        android:layoutDirection="rtl"
+        android:background="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_penilaian"
-        tools:listitem="@layout/anak_list"/>
+        tools:listitem="@layout/tanggal_list"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

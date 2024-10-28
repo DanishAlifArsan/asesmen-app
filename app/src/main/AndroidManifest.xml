@@ -15,6 +15,12 @@
         android:theme="@style/Theme.AsesmenPAUD"
         tools:targetApi="31">
         <activity
+            android:name=".PenilaianDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PenilaianCreateActivity"
+            android:exported="false" />
+        <activity
             android:name=".AnakDetailActivity"
             android:exported="false" />
         <activity
