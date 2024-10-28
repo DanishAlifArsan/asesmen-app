@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClassDetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/heading"
+        style="@style/layout.heading"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/anak_name"
+            style="@style/text.title.white"
+            android:layout_marginTop="16dp"
+            android:text="@string/nama_anak"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/usia"
+            style="@style/text.normal.white"
+            android:layout_marginTop="16dp"
+            android:text="@string/usia"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/anak_name" />
+
+        <TextView
+            android:id="@+id/usia_value"
+            style="@style/text.normal.white"
+            android:text="@string/usia_value"
+            app:layout_constraintStart_toStartOf="@+id/kelamin_value"
+            app:layout_constraintBottom_toBottomOf="@+id/usia"
+            app:layout_constraintTop_toTopOf="@+id/usia" />
+
+        <TextView
+            android:id="@+id/kelamin"
+            style="@style/text.normal.white"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/jenis_kelamin"
+            app:layout_constraintStart_toStartOf="@+id/usia"
+            app:layout_constraintTop_toBottomOf="@+id/usia"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/kelamin_value"
+            style="@style/text.normal.white"
+            android:layout_marginStart="16dp"
+            android:text="@string/kelamin_value"
+            app:layout_constraintStart_toEndOf="@+id/kelamin"
+            app:layout_constraintBottom_toBottomOf="@+id/kelamin"
+            app:layout_constraintTop_toTopOf="@+id/kelamin" />
+
+        <TextView
+            android:id="@+id/berat"
+            style="@style/text.normal.white"
+            android:layout_marginStart="30dp"
+            android:text="@string/berat"
+            app:layout_constraintStart_toEndOf="@+id/usia_value"
+            app:layout_constraintTop_toTopOf="@+id/usia_value"
+            app:layout_constraintBottom_toBottomOf="@+id/usia_value"/>
+
+        <TextView
+            android:id="@+id/berat_value"
+            style="@style/text.normal.white"
+            android:layout_marginStart="16dp"
+            android:text="@string/berat_value"
+            app:layout_constraintStart_toEndOf="@+id/berat"
+            app:layout_constraintBottom_toBottomOf="@+id/berat"
+            app:layout_constraintTop_toTopOf="@+id/berat" />
+
+        <TextView
+            android:id="@+id/tinggi"
+            style="@style/text.normal.white"
+            android:text="@string/tinggi"
+            app:layout_constraintStart_toStartOf="@+id/berat"
+            app:layout_constraintTop_toTopOf="@+id/kelamin_value"
+            app:layout_constraintBottom_toBottomOf="@+id/kelamin_value"/>
+
+        <TextView
+            android:id="@+id/tinggi_value"
+            style="@style/text.normal.white"
+            android:text="@string/tinggi_value"
+            app:layout_constraintStart_toStartOf="@+id/berat_value"
+            app:layout_constraintBottom_toBottomOf="@+id/tinggi"
+            app:layout_constraintTop_toTopOf="@+id/tinggi" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_penilaian"
+        style="@style/button.regular"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@id/heading"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/tambah_penilaian"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_penilaian"
+        tools:listitem="@layout/anak_list"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
