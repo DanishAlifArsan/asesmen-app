@@ -3,20 +3,20 @@
 
     <string name="kelasku">Kelasku</string>
     <string name="anak">Anak</string>
-    <string name="semester">Semester 1$d</string>
-    <string name="nama_kelas">Kelas-1$d</string>
+    <string name="semester">Semester %1$d</string>
+    <string name="nama_kelas">Kelas-%1$s</string>
     <string name="desc_kelas">Deskripsi</string>
-    <string name="tahun_ajaran">Tahun Ajaran 1$d</string>
+    <string name="tahun_ajaran">Tahun Ajaran %1$d</string>
     <string name="nama_anak">Anak</string>
     <string name="desc_anak">Deskripsi</string>
     <string name="usia">kelompok Usia</string>
-    <string name="usia_value">: 1$d Tahun</string>
+    <string name="usia_value">: %1$d Tahun</string>
     <string name="jenis_kelamin">Jenis Kelamin</string>
-    <string name="kelamin_value">: 1$d</string>
+    <string name="kelamin_value">: %1$d</string>
     <string name="berat">Berat Badan</string>
-    <string name="berat_value">: 1$d kg</string>
+    <string name="berat_value">: %1$d kg</string>
     <string name="tinggi">Tinggi Badan</string>
-    <string name="tinggi_value">: 1$d cm</string>
+    <string name="tinggi_value">: %1$d cm</string>
     <string name="tanggal">12/09/2024</string>
     <string name="tambah_penilaian">Tambah Penilaian</string>
     <string name="edit_penilaian">Edit Penilaian</string>

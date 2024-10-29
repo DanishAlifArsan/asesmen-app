@@ -13,6 +13,7 @@
         app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout"
             style="@style/layout.content"
             android:orientation="vertical">
 
@@ -24,6 +25,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
+                android:id="@+id/class_desc"
                 style="@style/text.normal"
                 android:layout_marginTop="16dp"
                 android:text="@string/desc_kelas"
