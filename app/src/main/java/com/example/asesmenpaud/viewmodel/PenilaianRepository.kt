@@ -28,6 +28,8 @@ class PenilaianRepository {
             ListPenilaianItem(1,"Ananda mengerti satu", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnf_Fyd39gBMLjI_PG6MwsGGo1qjzbmG0X5g&s", "30/10/2024",1),
             ListPenilaianItem(2,"Ananda mengerti dua", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnf_Fyd39gBMLjI_PG6MwsGGo1qjzbmG0X5g&s", "1/10/2024",2),
             ListPenilaianItem(3,"Ananda mengerti tiga", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnf_Fyd39gBMLjI_PG6MwsGGo1qjzbmG0X5g&s", "20/10/2024",3),
+            ListPenilaianItem(4,"Ananda dapat empat", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnf_Fyd39gBMLjI_PG6MwsGGo1qjzbmG0X5g&s", "20/10/2024",3),
+            ListPenilaianItem(5,"Ananda bisa lima", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnf_Fyd39gBMLjI_PG6MwsGGo1qjzbmG0X5g&s", "5/10/2024",3),
         ))
 
         val filteredPenilaian = PenilaianData(listPenilaian.listPenilaian.filter {it.idAnak == idAnak})

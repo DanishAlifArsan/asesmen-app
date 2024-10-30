@@ -30,6 +30,6 @@
         android:layout_marginTop="16dp"
         android:text="@string/desc_penilaian"
         app:layout_constraintTop_toBottomOf="@+id/photo"
-        app:layout_constraintStart_toStartOf="pargent"/>
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

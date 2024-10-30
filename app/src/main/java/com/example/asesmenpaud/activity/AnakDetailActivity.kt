@@ -73,11 +73,12 @@ class AnakDetailActivity : AppCompatActivity() {
 //                adapter.submitList(it.listStory.sortedByDescending { it.createdAt} )
 //                binding.recyclerView.adapter = adapter
 //            }
-            var date : List<String> = emptyList()
-            var penilaian : Map<String, List<ListPenilaianItem>> = emptyMap()
-//            var penilaian = it.listPenilaian.groupBy {
-//                p -> p.date
-//            }
+//            var date : List<String> = emptyList()
+//            var penilaian : Map<String, List<ListPenilaianItem>> = emptyMap()
+            var penilaian : Map<String, List<ListPenilaianItem>> = it.listPenilaian.groupBy {
+                p -> p.date.toString()
+            }
+            var date : List<String>  = penilaian.keys.toList()
 //            for (i in 0 .. it.listPenilaian.size) {
 //
 //            } // to do grup berdasarkan tanggalnya

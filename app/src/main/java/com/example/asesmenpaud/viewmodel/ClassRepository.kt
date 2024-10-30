@@ -23,7 +23,7 @@ class ClassRepository {
 //            }
 //        }
 
-        val listClass = ListClass(1, "A", "Lorem ipsum")
+        val listClass = ListClass(1, "A", "Lorem ipsum", "I", "2024-2025")
         classResponse.value = listClass
         progressBar.value = false
 

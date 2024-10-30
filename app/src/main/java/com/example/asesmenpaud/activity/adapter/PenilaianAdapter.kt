@@ -36,11 +36,11 @@ class PenilaianAdapter(
     }
 
     override fun getGroupId(p0: Int): Long {
-       return p0 as Long
+       return p0.toLong()
     }
 
     override fun getChildId(p0: Int, p1: Int): Long {
-        return p1 as Long
+        return p1.toLong()
     }
 
     override fun hasStableIds(): Boolean {
@@ -61,7 +61,7 @@ class PenilaianAdapter(
 
         binding.tanggal.text = date
 
-        return p2 as View
+        return binding.root
     }
 
     override fun getChildView(p0: Int, p1: Int, p2: Boolean, p3: View?, p4: ViewGroup?): View {
@@ -73,7 +73,7 @@ class PenilaianAdapter(
 //        }
         val binding = PenilaianListBinding.inflate(LayoutInflater.from(ctx), p4, false)
 
-        binding.penilaianDesc.text = penilaian.desc // di substring untuk 10 kata pertama
+        binding.penilaianDesc.text = penilaian.desc?.substring(0, 10) +" ..." // di substring untuk 10 kata pertama
 
         binding.layout.setOnClickListener {
             val i = Intent(ctx, PenilaianDetailActivity::class.java)
@@ -81,7 +81,7 @@ class PenilaianAdapter(
             ctx.startActivity(i)
         }
 
-        return p2 as View
+        return binding.root
     }
 
     override fun isChildSelectable(p0: Int, p1: Int): Boolean {

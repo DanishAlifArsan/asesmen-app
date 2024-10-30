@@ -31,6 +31,8 @@ class ClassDetailActivity : AppCompatActivity() {
         if (myClass != null) {
             binding.className.text = getString(R.string.nama_kelas, myClass.className)
             binding.classDesc.text = "${myClass.classDesc}"
+            binding.semester.text = getString(R.string.semester, myClass.semester)
+            binding.tahunAjaran.text = getString(R.string.tahun_ajaran, myClass.year)
         }
 
         showAnak()

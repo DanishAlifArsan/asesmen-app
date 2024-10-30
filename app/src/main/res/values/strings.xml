@@ -3,10 +3,10 @@
 
     <string name="kelasku">Kelasku</string>
     <string name="anak">Anak</string>
-    <string name="semester">Semester %1$d</string>
+    <string name="semester">Semester %1$s</string>
     <string name="nama_kelas">Kelas-%1$s</string>
     <string name="desc_kelas">Deskripsi</string>
-    <string name="tahun_ajaran">Tahun Ajaran %1$d</string>
+    <string name="tahun_ajaran">Tahun Ajaran %1$s</string>
     <string name="nama_anak">Anak</string>
     <string name="desc_anak">Deskripsi</string>
     <string name="usia">kelompok Usia</string>

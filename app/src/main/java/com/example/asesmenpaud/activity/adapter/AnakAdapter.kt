@@ -15,9 +15,9 @@ import com.example.asesmenpaud.databinding.AnakListBinding
 class AnakAdapter : ListAdapter<ListAnakItem, AnakAdapter.MyViewHolder>(DIFF_CALLBACK){
     class MyViewHolder(val binding: AnakListBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(holder: MyViewHolder, anak: ListAnakItem){
-            binding.anakName.text = holder.itemView.context.getString(R.string.nama_kelas, anak.name)
+            binding.anakName.text = anak.name
             binding.layout.setOnClickListener {
-                val i = Intent(holder.itemView.context, ClassDetailActivity::class.java)
+                val i = Intent(holder.itemView.context, AnakDetailActivity::class.java)
                 i.putExtra(AnakDetailActivity.ANAK_KEY, anak)
                 holder.itemView.context.startActivity(i)
             }
