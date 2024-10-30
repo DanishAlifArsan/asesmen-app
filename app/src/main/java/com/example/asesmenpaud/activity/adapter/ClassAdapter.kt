@@ -1,4 +1,4 @@
-package com.example.asesmenpaud
+package com.example.asesmenpaud.activity.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.asesmenpaud.R
 import com.example.asesmenpaud.activity.ClassDetailActivity
-import com.example.asesmenpaud.activity.MainActivity
 import com.example.asesmenpaud.data.ListClass
 import com.example.asesmenpaud.databinding.ClassListBinding
 

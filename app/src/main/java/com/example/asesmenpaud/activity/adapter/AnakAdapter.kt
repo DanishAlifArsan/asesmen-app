@@ -1,4 +1,4 @@
-package com.example.asesmenpaud
+package com.example.asesmenpaud.activity.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.asesmenpaud.R
 import com.example.asesmenpaud.activity.AnakDetailActivity
 import com.example.asesmenpaud.activity.ClassDetailActivity
 import com.example.asesmenpaud.data.ListAnakItem
-import com.example.asesmenpaud.data.ListClass
 import com.example.asesmenpaud.databinding.AnakListBinding
 
 class AnakAdapter : ListAdapter<ListAnakItem, AnakAdapter.MyViewHolder>(DIFF_CALLBACK){
@@ -18,7 +18,7 @@ class AnakAdapter : ListAdapter<ListAnakItem, AnakAdapter.MyViewHolder>(DIFF_CAL
             binding.anakName.text = holder.itemView.context.getString(R.string.nama_kelas, anak.name)
             binding.layout.setOnClickListener {
                 val i = Intent(holder.itemView.context, ClassDetailActivity::class.java)
-                    i.putExtra(AnakDetailActivity.ANAK_KEY, anak)
+                i.putExtra(AnakDetailActivity.ANAK_KEY, anak)
                 holder.itemView.context.startActivity(i)
             }
         }

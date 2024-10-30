@@ -17,10 +17,3 @@ data class ListAnakItem(
     val height : Int? = null,
     val listPenilaian : List<ListPenilaianItem> = emptyList(),
 ) : Parcelable
-
-@Parcelize
-data class ListPenilaianItem(
-    val id : Int,
-    val desc : String? = null,
-    val photoUrl : String? = null
-) : Parcelable

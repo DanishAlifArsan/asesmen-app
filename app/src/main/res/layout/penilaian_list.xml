@@ -5,6 +5,7 @@
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
         style="@style/layout.content"
         android:orientation="vertical">
 

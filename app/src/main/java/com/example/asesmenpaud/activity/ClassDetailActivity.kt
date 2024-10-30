@@ -1,13 +1,13 @@
 package com.example.asesmenpaud.activity
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.asesmenpaud.AnakAdapter
-import com.example.asesmenpaud.ClassAdapter
+import com.example.asesmenpaud.activity.adapter.AnakAdapter
 import com.example.asesmenpaud.R
 import com.example.asesmenpaud.data.ListClass
 import com.example.asesmenpaud.databinding.ActivityClassDetailBinding
@@ -31,6 +31,14 @@ class ClassDetailActivity : AppCompatActivity() {
         if (myClass != null) {
             binding.className.text = getString(R.string.nama_kelas, myClass.className)
             binding.classDesc.text = "${myClass.classDesc}"
+        }
+
+        showAnak()
+
+        binding.btnBack.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
         }
     }
 
