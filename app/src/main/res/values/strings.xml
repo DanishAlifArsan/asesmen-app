@@ -10,9 +10,9 @@
     <string name="nama_anak">Anak</string>
     <string name="desc_anak">Deskripsi</string>
     <string name="usia">kelompok Usia</string>
-    <string name="usia_value">: %1$d Tahun</string>
+    <string name="usia_value">: %1$s Tahun</string>
     <string name="jenis_kelamin">Jenis Kelamin</string>
-    <string name="kelamin_value">: %1$d</string>
+    <string name="kelamin_value">: %1$s</string>
     <string name="berat">Berat Badan</string>
     <string name="berat_value">: %1$d kg</string>
     <string name="tinggi">Tinggi Badan</string>

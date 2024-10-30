@@ -1,15 +1,12 @@
-package com.example.asesmenpaud
+package com.example.asesmenpaud.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.asesmenpaud.ClassAdapter
 import com.example.asesmenpaud.data.ListClass
 import com.example.asesmenpaud.databinding.ActivityMainBinding
 import com.example.asesmenpaud.viewmodel.ClassViewModel
@@ -23,10 +20,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        showStoryList()
+        showKelas()
     }
 
-    private fun showStoryList() {
+    private fun showKelas() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
 //        val storyViewModel = obtainViewModel(this@MainActivity)
@@ -55,4 +52,10 @@ class MainActivity : AppCompatActivity() {
     private fun showProgressBar(status : Boolean) {
         binding.progressBar.visibility = if (status) View.VISIBLE else View.GONE
     }
+
+//     fun showDetailKelasActivity(listClass : ListClass) {
+//        val i = Intent(this@MainActivity, ClassDetailActivity::class.java)
+//        i.putExtra(ClassDetailActivity.CLASS_KEY, listClass)
+//        startActivity(i)
+//    }
 }

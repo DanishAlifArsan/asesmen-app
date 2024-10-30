@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.asesmenpaud.activity.ClassDetailActivity
+import com.example.asesmenpaud.activity.MainActivity
 import com.example.asesmenpaud.data.ListClass
 import com.example.asesmenpaud.databinding.ClassListBinding
 
@@ -18,6 +20,8 @@ class ClassAdapter : ListAdapter<ListClass, ClassAdapter.MyViewHolder>(DIFF_CALL
                 val i = Intent(holder.itemView.context, ClassDetailActivity::class.java)
                 i.putExtra(ClassDetailActivity.CLASS_KEY, `class`)
                 holder.itemView.context.startActivity(i)
+//                val activity = holder.itemView.context as MainActivity
+//                activity.showDetailKelasActivity(`class`)
             }
         }
     }

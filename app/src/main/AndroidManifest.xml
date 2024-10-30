@@ -15,19 +15,19 @@
         android:theme="@style/Theme.AsesmenPAUD"
         tools:targetApi="31">
         <activity
-            android:name=".PenilaianDetailActivity"
+            android:name=".activity.PenilaianDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".PenilaianCreateActivity"
+            android:name=".activity.PenilaianCreateActivity"
             android:exported="false" />
         <activity
-            android:name=".AnakDetailActivity"
+            android:name=".activity.AnakDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ClassDetailActivity"
+            android:name=".activity.ClassDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true"
             android:theme="@style/MainActivityTheme">
             <intent-filter>
