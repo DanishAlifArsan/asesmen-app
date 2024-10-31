@@ -3,12 +3,16 @@ package com.example.asesmenpaud.activity.adapter
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
+import android.widget.PopupMenu
+import androidx.appcompat.app.AlertDialog
 import com.example.asesmenpaud.R
 import com.example.asesmenpaud.activity.AnakDetailActivity
 import com.example.asesmenpaud.activity.ClassDetailActivity
+import com.example.asesmenpaud.activity.PenilaianCreateActivity
 import com.example.asesmenpaud.activity.PenilaianDetailActivity
 import com.example.asesmenpaud.data.ListPenilaianItem
 import com.example.asesmenpaud.databinding.ClassListBinding
@@ -81,10 +85,51 @@ class PenilaianAdapter(
             ctx.startActivity(i)
         }
 
+        binding.btnSetting.setOnClickListener{
+            showMenu(it, penilaian)
+        }
+
         return binding.root
+    }
+
+    fun showMenu(v: View, penilaian : ListPenilaianItem) {
+        PopupMenu(ctx, v).apply {
+            setOnMenuItemClickListener{
+                menuClick(it, penilaian)
+            }
+            inflate(R.menu.item_menu)
+            show()
+        }
     }
 
     override fun isChildSelectable(p0: Int, p1: Int): Boolean {
         return true
+    }
+
+    fun menuClick(item: MenuItem, penilaian : ListPenilaianItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_edit -> {
+                val i = Intent(ctx, PenilaianCreateActivity::class.java)
+                i.putExtra(PenilaianCreateActivity.PENILAIAN_KEY, penilaian)
+                ctx.startActivity(i)
+                true
+            }
+            R.id.action_delete -> {
+                AlertDialog.Builder(ctx).apply {
+                    setTitle(ctx.getString(R.string.hapus))
+                    setMessage(ctx.getString(R.string.konfirmasi_hapus))
+                    setPositiveButton(ctx.getString(R.string.ya)) { _, _ ->
+//                        viewModel.logout()
+                    }
+                    setNegativeButton(ctx.getString(R.string.tidak)) { _, _ ->
+                        setCancelable(true)
+                    }
+                    create()
+                    show()
+                }
+                true
+            }
+            else -> false
+        }
     }
 }

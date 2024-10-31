@@ -23,6 +23,11 @@
         <item name="android:background">@drawable/heading_background</item>
     </style>
 
+    <style name="layout.heading.full">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/primary</item>
+    </style>
+
     <style name="layout.content">
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/white</item>

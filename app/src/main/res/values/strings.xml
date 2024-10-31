@@ -20,9 +20,11 @@
     <string name="tanggal">12/09/2024</string>
     <string name="tambah_penilaian">Tambah Penilaian</string>
     <string name="edit_penilaian">Edit Penilaian</string>
+    <string name="hapus_penilaian">Hapus Penilaian</string>
     <string name="desc_penilaian">Deskripsi</string>
     <string name="simpan">Simpan</string>
     <string name="ya">Ya</string>
-    <string name="tidak">Simpan</string>
-
+    <string name="tidak">Tidak</string>
+    <string name="hapus">Hapus</string>
+    <string name="konfirmasi_hapus">Apakah yakin ingin menghapus?</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.asesmenpaud.activity
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -34,6 +35,10 @@ class PenilaianDetailActivity : AppCompatActivity() {
             Glide.with(this)
                 .load(penilaian.photoUrl)
                 .into(binding.photo)
+        }
+
+        binding.btnBack.setOnClickListener{
+            finish()
         }
     }
 
