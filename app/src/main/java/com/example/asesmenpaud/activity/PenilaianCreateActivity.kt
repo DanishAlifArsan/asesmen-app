@@ -69,7 +69,8 @@ class PenilaianCreateActivity : AppCompatActivity() {
     }
 
     private fun startCamera() {
-        launcherIntentCamera.launch(intent)
+        val i = Intent(this, CameraActivity::class.java)
+        launcherIntentCamera.launch(i)
     }
 
     private fun showImage() {
