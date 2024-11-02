@@ -1,11 +1,14 @@
 package com.example.asesmenpaud.activity
 
 import android.Manifest
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.speech.RecognizerIntent
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -22,6 +25,7 @@ import com.example.asesmenpaud.databinding.ActivityPenilaianDetailBinding
 class PenilaianCreateActivity : AppCompatActivity() {
     private lateinit var binding : ActivityPenilaianCreateBinding
     private var currentImageUri : Uri? = null
+    private var speechText : ArrayList<String>? = null
 
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(
@@ -66,6 +70,19 @@ class PenilaianCreateActivity : AppCompatActivity() {
         binding.ivPhoto.setOnClickListener{
             startCamera()
         }
+
+        binding.btnMicrophone.setOnClickListener{
+            val i = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+            i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "id")
+
+            try {
+                launcherIntentSpeech.launch(i)
+            } catch (e : ActivityNotFoundException) {
+                Toast.makeText(this, "Tidak support speech to text.", Toast.LENGTH_LONG).show()
+            }
+
+        }
     }
 
     private fun startCamera() {
@@ -76,6 +93,21 @@ class PenilaianCreateActivity : AppCompatActivity() {
     private fun showImage() {
         currentImageUri?.let {
             binding.ivPhoto.setImageURI(it)
+        }
+    }
+
+    private fun showText() {
+        speechText?.let {
+            binding.edAddDescription.setText(it.get(0))
+        }
+    }
+
+    private val launcherIntentSpeech = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == RESULT_OK) {
+            speechText = it.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            showText()
         }
     }
 
