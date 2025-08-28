@@ -1,35 +1,38 @@
 package com.example.asesmenpaud.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.asesmenpaud.data.AnakData
+import com.example.asesmenpaud.data.ClassData
+import com.example.asesmenpaud.data.Database
 import com.example.asesmenpaud.data.ListAnakItem
+import com.example.asesmenpaud.data.ListClassItem
+import com.example.asesmenpaud.utils.Event
 
 class AnakRepository {
     val progressBar = MutableLiveData<Boolean>()
+    private val _snackbarText = MutableLiveData<Event<String>>()
 
-    fun getAllAnak() : MutableLiveData<AnakData> {
+    fun getAllAnak(classId : Int) : MutableLiveData<AnakData> {
         val anakResponse = MutableLiveData<AnakData>()
         progressBar.value = true
-//        scope.launch{
-//            try {
-//                storyResponse.postValue(apiService.getAllStories())
-//                progressBar.postValue(false)
-//            } catch (e : HttpException) {
-//                val jsonInString = e.response()?.errorBody()?.string()
-//                val errorBody = Gson().fromJson(jsonInString, StoryResponse::class.java)
-//                storyResponse.postValue(errorBody)
-//                progressBar.postValue(false)
-//            }
-//        }
 
-        val listAnak = AnakData( listOf(
-            ListAnakItem(1, "Adi", 1, true, 20, 100),
-            ListAnakItem(2, "Budi", 2, true, 20, 100),
-            ListAnakItem(3, "Caca", 1, false, 20, 100),
-        ))
-        anakResponse.value = listAnak
-        progressBar.value = false
+        Database.anakData(classId.toString()).get().addOnSuccessListener {
+            val anakList = mutableListOf<ListAnakItem?>()
+            for (messageSnapshot in it.children) {
+                val listClassItem = messageSnapshot.getValue(ListAnakItem::class.java)
+                anakList.add(listClassItem)
+            }
+
+            anakResponse.value = AnakData(anakList.toList())
+            progressBar.value = false
+        }.addOnFailureListener{
+            _snackbarText.value = Event("Gagal mendapatkan data kelas")
+            progressBar.value = false
+        }
 
         return anakResponse
     }
+
+    val snackbarText: LiveData<Event<String>> = _snackbarText
 }

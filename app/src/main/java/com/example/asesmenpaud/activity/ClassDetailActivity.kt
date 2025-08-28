@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,9 +34,8 @@ class ClassDetailActivity : AppCompatActivity() {
             binding.classDesc.text = "${myClass.classDesc}"
             binding.semester.text = getString(R.string.semester, myClass.semester)
             binding.tahunAjaran.text = getString(R.string.tahun_ajaran, myClass.year)
+            showAnak(myClass.classId as Int)
         }
-
-        showAnak()
 
         binding.btnBack.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
@@ -44,11 +44,11 @@ class ClassDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun showAnak() {
+    private fun showAnak(classId : Int) {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
 //        val storyViewModel = obtainViewModel(this@MainActivity)
-        anakViewModel.getAllAnak().observe(this) {
+        anakViewModel.getAllAnak(classId).observe(this) {
 //            Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
 //            if (it.error == false) {
 //                val adapter = StoryAdapter()
@@ -58,6 +58,16 @@ class ClassDetailActivity : AppCompatActivity() {
             val adapter = AnakAdapter()
             adapter.submitList(it.listAnak)
             binding.recyclerView.adapter = adapter
+        }
+
+        anakViewModel.snackbarText().observe(this) {
+            it.getContentIfNotHandled()?.let { snackBarText ->
+                Toast.makeText(
+                    this,
+                    snackBarText,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         anakViewModel.progressBar().observe(this) {

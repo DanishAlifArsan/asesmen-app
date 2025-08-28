@@ -39,7 +39,6 @@ class AnakDetailActivity : AppCompatActivity() {
             binding.anakName.text = anak.name
             binding.tinggiValue.text = getString(R.string.tinggi_value, anak.height)
             binding.beratValue.text = getString(R.string.berat_value, anak.weight)
-
             binding.usiaValue.text = getString(R.string.usia_value,
                 when(anak.age) {
                     1 -> "3-4"
@@ -47,9 +46,9 @@ class AnakDetailActivity : AppCompatActivity() {
                     else -> "5-6"
                 })
             binding.kelaminValue.text = getString(R.string.kelamin_value,
-                if (anak.gender as Boolean) "Laki-laki"
+                if (anak.   gender as Boolean) "Laki-laki"
                         else "Perempuan")
-            showPenilaian(anak.id)
+            showPenilaian(anak.id as Int)
         }
 
         binding.btnPenilaian.setOnClickListener {

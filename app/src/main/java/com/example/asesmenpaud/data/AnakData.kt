@@ -4,12 +4,12 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 data class AnakData(
-    val listAnak: List<ListAnakItem> = emptyList(),
+    val listAnak: List<ListAnakItem?> = emptyList(),
 )
 
 @Parcelize
 data class ListAnakItem(
-    val id : Int,
+    val id : Int? = 0,
     val name : String? = null,
     val age : Int? = null,
     val gender : Boolean? = null,
