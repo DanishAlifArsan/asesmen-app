@@ -1,32 +1,36 @@
 package com.example.asesmenpaud.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.asesmenpaud.data.ListClass
-import kotlinx.coroutines.launch
-import java.io.File
+import com.example.asesmenpaud.data.ClassData
+import com.example.asesmenpaud.data.Database
+import com.example.asesmenpaud.data.ListClassItem
+import com.example.asesmenpaud.utils.Event
 
 class ClassRepository {
     val progressBar = MutableLiveData<Boolean>()
+    private val _snackbarText = MutableLiveData<Event<String>>()
 
-    fun getAllClass() : MutableLiveData<ListClass> {
-        val classResponse = MutableLiveData<ListClass>()
+    fun getAllClass() : MutableLiveData<ClassData> {
+        val classResponse = MutableLiveData<ClassData>()
         progressBar.value = true
-//        scope.launch{
-//            try {
-//                storyResponse.postValue(apiService.getAllStories())
-//                progressBar.postValue(false)
-//            } catch (e : HttpException) {
-//                val jsonInString = e.response()?.errorBody()?.string()
-//                val errorBody = Gson().fromJson(jsonInString, StoryResponse::class.java)
-//                storyResponse.postValue(errorBody)
-//                progressBar.postValue(false)
-//            }
-//        }
 
-        val listClass = ListClass(1, "A", "Lorem ipsum", "I", "2024-2025")
-        classResponse.value = listClass
-        progressBar.value = false
+        Database.classData().get().addOnSuccessListener {
+            val classList = mutableListOf<ListClassItem?>()
+            for (messageSnapshot in it.children) {
+                val listClassItem = messageSnapshot.getValue(ListClassItem::class.java)
+                classList.add(listClassItem)
+            }
+
+            classResponse.value = ClassData(classList.toList())
+            progressBar.value = false
+        }.addOnFailureListener{
+            _snackbarText.value = Event("Gagal mendapatkan data kelas")
+            progressBar.value = false
+        }
 
         return classResponse
     }
+
+    val snackbarText: LiveData<Event<String>> = _snackbarText
 }

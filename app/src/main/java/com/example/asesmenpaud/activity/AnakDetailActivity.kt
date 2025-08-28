@@ -13,7 +13,6 @@ import com.example.asesmenpaud.R
 import com.example.asesmenpaud.activity.adapter.AnakAdapter
 import com.example.asesmenpaud.activity.adapter.PenilaianAdapter
 import com.example.asesmenpaud.data.ListAnakItem
-import com.example.asesmenpaud.data.ListClass
 import com.example.asesmenpaud.data.ListPenilaianItem
 import com.example.asesmenpaud.databinding.ActivityAnakDetailBinding
 import com.example.asesmenpaud.databinding.ActivityClassDetailBinding

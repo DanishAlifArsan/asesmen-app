@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asesmenpaud.R
 import com.example.asesmenpaud.activity.ClassDetailActivity
-import com.example.asesmenpaud.data.ListClass
+import com.example.asesmenpaud.data.ListClassItem
 import com.example.asesmenpaud.databinding.ClassListBinding
 
-class ClassAdapter : ListAdapter<ListClass, ClassAdapter.MyViewHolder>(DIFF_CALLBACK){
+class ClassAdapter : ListAdapter<ListClassItem, ClassAdapter.MyViewHolder>(DIFF_CALLBACK){
     class MyViewHolder(val binding: ClassListBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(holder: MyViewHolder, `class`: ListClass){
+        fun bind(holder: MyViewHolder, `class`: ListClassItem){
             binding.className.text = holder.itemView.context.getString(R.string.nama_kelas, `class`.className)
             binding.classDesc.text = `class`.classDesc
             binding.layout.setOnClickListener {
@@ -36,11 +36,11 @@ class ClassAdapter : ListAdapter<ListClass, ClassAdapter.MyViewHolder>(DIFF_CALL
         holder.bind(holder, story)
     }
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ListClass>() {
-            override fun areItemsTheSame(oldItem: ListClass, newItem: ListClass): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ListClassItem>() {
+            override fun areItemsTheSame(oldItem: ListClassItem, newItem: ListClassItem): Boolean {
                 return oldItem == newItem
             }
-            override fun areContentsTheSame(oldItem: ListClass, newItem: ListClass): Boolean {
+            override fun areContentsTheSame(oldItem: ListClassItem, newItem: ListClassItem): Boolean {
                 return oldItem == newItem
             }
         }

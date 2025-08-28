@@ -16,7 +16,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.example.asesmenpaud.Utils.createCustomTempFile
+import com.example.asesmenpaud.utils.Utils.createCustomTempFile
 import com.example.asesmenpaud.databinding.ActivityCameraBinding
 
 class CameraActivity : AppCompatActivity() {

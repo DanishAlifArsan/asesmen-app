@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.asesmenpaud.activity.adapter.AnakAdapter
 import com.example.asesmenpaud.R
-import com.example.asesmenpaud.data.ListClass
+import com.example.asesmenpaud.data.ListClassItem
 import com.example.asesmenpaud.databinding.ActivityClassDetailBinding
 import com.example.asesmenpaud.viewmodel.AnakViewModel
 
@@ -23,7 +23,7 @@ class ClassDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val myClass = if (Build.VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra(CLASS_KEY, ListClass::class.java)
+            intent.getParcelableExtra(CLASS_KEY, ListClassItem::class.java)
         } else {
             @Suppress("DEPRECATION")
             intent.getParcelableExtra(CLASS_KEY)

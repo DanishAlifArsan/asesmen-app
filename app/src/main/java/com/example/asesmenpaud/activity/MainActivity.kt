@@ -2,12 +2,14 @@ package com.example.asesmenpaud.activity
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.asesmenpaud.activity.adapter.ClassAdapter
 import com.example.asesmenpaud.databinding.ActivityMainBinding
 import com.example.asesmenpaud.viewmodel.ClassViewModel
+import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -33,8 +35,18 @@ class MainActivity : AppCompatActivity() {
 //                binding.recyclerView.adapter = adapter
 //            }
             val adapter = ClassAdapter()
-            adapter.submitList(listOf(it))
+            adapter.submitList(it.listClass)
             binding.recyclerView.adapter = adapter
+        }
+
+        classViewModel.snackbarText().observe(this) {
+            it.getContentIfNotHandled()?.let { snackBarText ->
+                Toast.makeText(
+                    this,
+                    snackBarText,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         classViewModel.progressBar().observe(this) {

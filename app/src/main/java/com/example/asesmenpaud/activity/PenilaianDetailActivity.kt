@@ -9,7 +9,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.example.asesmenpaud.R
-import com.example.asesmenpaud.data.ListClass
 import com.example.asesmenpaud.data.ListPenilaianItem
 import com.example.asesmenpaud.databinding.ActivityAnakDetailBinding
 import com.example.asesmenpaud.databinding.ActivityPenilaianDetailBinding

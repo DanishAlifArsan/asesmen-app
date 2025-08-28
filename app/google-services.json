@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "448997806694",
+    "firebase_url": "https://asesmenpaud-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "asesmenpaud",
+    "storage_bucket": "asesmenpaud.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448997806694:android:6a9b8101fcf48e622013a7",
+        "android_client_info": {
+          "package_name": "com.example.asesmenpaud"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8aBXxueB_zyfrOPirpzR2ZSwgGR-4Ivs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,12 +2,14 @@ package com.example.asesmenpaud.viewmodel
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.asesmenpaud.data.ListClass
+import com.example.asesmenpaud.data.ClassData
+import com.example.asesmenpaud.utils.Event
 
 class ClassViewModel () : ViewModel() {
     val classRepository = ClassRepository()
-    fun getAllClass() : LiveData<ListClass> {
+    fun getAllClass() : LiveData<ClassData> {
         return classRepository.getAllClass()
     }
 
@@ -17,5 +19,9 @@ class ClassViewModel () : ViewModel() {
 
     fun progressBar() : LiveData<Boolean> {
         return classRepository.progressBar
+    }
+
+    fun snackbarText() : LiveData<Event<String>> {
+        return classRepository.snackbarText
     }
 }

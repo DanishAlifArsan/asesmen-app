@@ -3,7 +3,6 @@ package com.example.asesmenpaud.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.example.asesmenpaud.data.AnakData
 import com.example.asesmenpaud.data.ListAnakItem
-import com.example.asesmenpaud.data.ListClass
 
 class AnakRepository {
     val progressBar = MutableLiveData<Boolean>()
