@@ -8,11 +8,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.speech.RecognizerIntent
-import android.speech.tts.TextToSpeech
-import android.util.Log
+import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -20,12 +19,16 @@ import com.bumptech.glide.Glide
 import com.example.asesmenpaud.R
 import com.example.asesmenpaud.data.ListPenilaianItem
 import com.example.asesmenpaud.databinding.ActivityPenilaianCreateBinding
-import com.example.asesmenpaud.databinding.ActivityPenilaianDetailBinding
+import com.example.asesmenpaud.viewmodel.PenilaianViewModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
 
 class PenilaianCreateActivity : AppCompatActivity() {
     private lateinit var binding : ActivityPenilaianCreateBinding
+    private val penilaianViewModel: PenilaianViewModel by viewModels()
     private var currentImageUri : Uri? = null
     private var speechText : ArrayList<String>? = null
+    private var idAnak = 0
 
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(
@@ -44,19 +47,23 @@ class PenilaianCreateActivity : AppCompatActivity() {
         }
 
         val penilaian = if (Build.VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra(PenilaianDetailActivity.PENILAIAN_KEY, ListPenilaianItem::class.java)
+            intent.getParcelableExtra(EDIT_PENILAIAN_KEY, ListPenilaianItem::class.java)
         } else {
             @Suppress("DEPRECATION")
-            intent.getParcelableExtra(PenilaianDetailActivity.PENILAIAN_KEY)
+            intent.getParcelableExtra(EDIT_PENILAIAN_KEY)
         }
+
+        val anak = intent.getIntExtra(NEW_PENILAIAN_KEY, 0)
         if (penilaian != null) {
             binding.title.text = getString(R.string.edit_penilaian)
             binding.edAddDescription.setText(penilaian.desc)
             Glide.with(this)
                 .load(penilaian.photoUrl)
                 .into(binding.ivPhoto)
+            idAnak = penilaian.idAnak as Int
         } else {
             binding.title.text = getString(R.string.tambah_penilaian)
+            idAnak = anak
         }
 
         binding.btnBack.setOnClickListener{
@@ -64,7 +71,21 @@ class PenilaianCreateActivity : AppCompatActivity() {
         }
 
         binding.btnSave.setOnClickListener {    // buat save ke database
-            finish()
+            val date = Calendar.getInstance().time
+            val formatter = SimpleDateFormat.getDateTimeInstance()
+            val formatedDate = formatter.format(date)
+
+            var listPenilaianItem = ListPenilaianItem(
+                desc = binding.edAddDescription.text.toString(),
+                photoUrl = currentImageUri.toString(),
+                date = if (penilaian != null) { penilaian.date} else { formatedDate } ,
+                idAnak = idAnak
+            )
+            penilaianViewModel.createPenilaian(listPenilaianItem).observe(this) {
+                if (it != null) {
+                    finish()
+                }
+            }
         }
 
         binding.ivPhoto.setOnClickListener{
@@ -81,9 +102,27 @@ class PenilaianCreateActivity : AppCompatActivity() {
             } catch (e : ActivityNotFoundException) {
                 Toast.makeText(this, "Tidak support speech to text.", Toast.LENGTH_LONG).show()
             }
+        }
 
+        penilaianViewModel.snackbarText().observe(this) {
+            it.getContentIfNotHandled()?.let { snackBarText ->
+                Toast.makeText(
+                    this,
+                    snackBarText,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        penilaianViewModel.progressBar().observe(this) {
+            showProgressBar(it)
         }
     }
+
+    private fun showProgressBar(status : Boolean) {
+        binding.progressBar.visibility = if (status) View.VISIBLE else View.GONE
+    }
+
 
     private fun startCamera() {
         val i = Intent(this, CameraActivity::class.java)
@@ -132,7 +171,8 @@ class PenilaianCreateActivity : AppCompatActivity() {
         }
 
     companion object{
-        const val PENILAIAN_KEY = "penilaian_key"
+        const val EDIT_PENILAIAN_KEY = "edit_penilaian_key"
+        const val NEW_PENILAIAN_KEY = "new_penilaian_key"
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
 }

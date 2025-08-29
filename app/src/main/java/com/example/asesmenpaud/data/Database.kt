@@ -13,12 +13,11 @@ class Database {
         fun classData(): DatabaseReference {
             return db.reference.child(CLASS_CHILD)
         }
-        fun anakData(classId : String): DatabaseReference {
-            return db.reference.child(CLASS_CHILD).child(classId).child(ANAK_CHILD)
+        fun anakData(): DatabaseReference {
+            return db.reference.child(ANAK_CHILD)
         }
-        fun penilaianData(classId : String, anakId : String): DatabaseReference {
-            return db.reference.child(CLASS_CHILD).child(classId).child(ANAK_CHILD).child(anakId).child(
-                PENILAIAN_CHILD)
+        fun penilaianData(): DatabaseReference {
+            return db.reference.child(PENILAIAN_CHILD)
         }
     }
 }

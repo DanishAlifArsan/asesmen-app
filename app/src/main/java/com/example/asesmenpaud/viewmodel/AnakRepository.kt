@@ -7,6 +7,7 @@ import com.example.asesmenpaud.data.ClassData
 import com.example.asesmenpaud.data.Database
 import com.example.asesmenpaud.data.ListAnakItem
 import com.example.asesmenpaud.data.ListClassItem
+import com.example.asesmenpaud.data.PenilaianData
 import com.example.asesmenpaud.utils.Event
 
 class AnakRepository {
@@ -17,17 +18,20 @@ class AnakRepository {
         val anakResponse = MutableLiveData<AnakData>()
         progressBar.value = true
 
-        Database.anakData(classId.toString()).get().addOnSuccessListener {
-            val anakList = mutableListOf<ListAnakItem?>()
-            for (messageSnapshot in it.children) {
-                val listClassItem = messageSnapshot.getValue(ListAnakItem::class.java)
-                anakList.add(listClassItem)
+        Database.anakData().get().addOnSuccessListener { response ->
+            val anakList = mutableListOf<ListAnakItem>()
+            for (messageSnapshot in response.children) {
+                val listAnakItem = messageSnapshot.getValue(ListAnakItem::class.java)
+                if (listAnakItem != null) {
+                    anakList.add(listAnakItem)
+                }
             }
 
-            anakResponse.value = AnakData(anakList.toList())
+            val filteredAnak = AnakData(anakList.filter {it.classId == classId})
+            anakResponse.value = filteredAnak
             progressBar.value = false
         }.addOnFailureListener{
-            _snackbarText.value = Event("Gagal mendapatkan data kelas")
+            _snackbarText.value = Event("Gagal mendapatkan data anak")
             progressBar.value = false
         }
 

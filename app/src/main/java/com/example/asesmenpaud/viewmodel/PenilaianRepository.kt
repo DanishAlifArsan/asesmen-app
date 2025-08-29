@@ -1,43 +1,61 @@
 package com.example.asesmenpaud.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.asesmenpaud.data.AnakData
-import com.example.asesmenpaud.data.ListAnakItem
+import com.example.asesmenpaud.data.Database
 import com.example.asesmenpaud.data.ListPenilaianItem
 import com.example.asesmenpaud.data.PenilaianData
+import com.example.asesmenpaud.utils.Event
+import com.google.firebase.database.DatabaseError
 
 class PenilaianRepository {
     val progressBar = MutableLiveData<Boolean>()
+    private val _snackbarText = MutableLiveData<Event<String>>()
 
     fun getPenilaian(idAnak : Int) : MutableLiveData<PenilaianData> {
         val penilaianResponse = MutableLiveData<PenilaianData>()
         progressBar.value = true
-//        scope.launch{
-//            try {
-//                storyResponse.postValue(apiService.getAllStories())
-//                progressBar.postValue(false)
-//            } catch (e : HttpException) {
-//                val jsonInString = e.response()?.errorBody()?.string()
-//                val errorBody = Gson().fromJson(jsonInString, StoryResponse::class.java)
-//                storyResponse.postValue(errorBody)
-//                progressBar.postValue(false)
-//            }
-//        }
 
-        val listPenilaian = PenilaianData( listOf(
-            ListPenilaianItem(1,"Ananda mengerti satu", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnf_Fyd39gBMLjI_PG6MwsGGo1qjzbmG0X5g&s", "30/10/2024",1),
-            ListPenilaianItem(2,"Ananda mengerti dua", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnf_Fyd39gBMLjI_PG6MwsGGo1qjzbmG0X5g&s", "1/10/2024",2),
-            ListPenilaianItem(3,"Ananda mengerti tiga", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnf_Fyd39gBMLjI_PG6MwsGGo1qjzbmG0X5g&s", "20/10/2024",3),
-            ListPenilaianItem(4,"Ananda dapat empat", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnf_Fyd39gBMLjI_PG6MwsGGo1qjzbmG0X5g&s", "20/10/2024",3),
-            ListPenilaianItem(5,"Ananda bisa lima", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnf_Fyd39gBMLjI_PG6MwsGGo1qjzbmG0X5g&s", "5/10/2024",3),
-        ))
+        Database.penilaianData().get().addOnSuccessListener { response ->
+            val penilaianList = mutableListOf<ListPenilaianItem>()
+            for (messageSnapshot in response.children) {
+                val listClassItem = messageSnapshot.getValue(ListPenilaianItem::class.java)
+                if (listClassItem != null) {
+                    penilaianList.add(listClassItem)
+                }
+            }
 
-        val filteredPenilaian = PenilaianData(listPenilaian.listPenilaian.filter {it.idAnak == idAnak})
-
-        penilaianResponse.value = filteredPenilaian
-795
-        progressBar.value = false
+            val filteredPenilaian = PenilaianData(penilaianList.filter {it.idAnak == idAnak})
+            penilaianResponse.value = filteredPenilaian
+            progressBar.value = false
+        }.addOnFailureListener{
+            _snackbarText.value = Event("Gagal mendapatkan data penilaian")
+            progressBar.value = false
+        }
 
         return penilaianResponse
     }
+
+    fun createPenilaian(listPenilaianItem: ListPenilaianItem) : MutableLiveData<DatabaseError?> {
+        progressBar.value = true
+        val error = MutableLiveData<DatabaseError?>()
+        val penilaianRef = Database.penilaianData().push()
+        listPenilaianItem.id = penilaianRef.key
+
+        penilaianRef.setValue(listPenilaianItem) { err, _  ->
+            error.value = err
+            if (err != null) {
+                _snackbarText.value = Event("Sukses menambahkan data penilaian")
+                progressBar.value = false
+            } else {
+                _snackbarText.value = Event("Gagal menambahkan data penilaian")
+                progressBar.value = false
+            }
+        }
+
+        return error
+    }
+
+    val snackbarText: LiveData<Event<String>> = _snackbarText
 }

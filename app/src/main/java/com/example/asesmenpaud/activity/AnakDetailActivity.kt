@@ -3,6 +3,8 @@ package com.example.asesmenpaud.activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -49,11 +51,12 @@ class AnakDetailActivity : AppCompatActivity() {
                 if (anak.   gender as Boolean) "Laki-laki"
                         else "Perempuan")
             showPenilaian(anak.id as Int)
-        }
 
-        binding.btnPenilaian.setOnClickListener {
-            val i = Intent(this, PenilaianCreateActivity::class.java)
-            startActivity(i)
+            binding.btnPenilaian.setOnClickListener {
+                val i = Intent(this, PenilaianCreateActivity::class.java)
+                i.putExtra(PenilaianCreateActivity.NEW_PENILAIAN_KEY, anak.id);
+                startActivity(i)
+            }
         }
 
         binding.btnBack.setOnClickListener{
@@ -63,25 +66,32 @@ class AnakDetailActivity : AppCompatActivity() {
 
     private fun showPenilaian(idAnak : Int) {
         penilaianViewModel.getPenilaian(idAnak).observe(this) {
-//            Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-//            if (it.error == false) {
-//                val adapter = StoryAdapter()
-//                adapter.submitList(it.listStory.sortedByDescending { it.createdAt} )
-//                binding.recyclerView.adapter = adapter
-//            }
-//            var date : List<String> = emptyList()
-//            var penilaian : Map<String, List<ListPenilaianItem>> = emptyMap()
-            var penilaian : Map<String, List<ListPenilaianItem>> = it.listPenilaian.groupBy {
+            val listPenilaian = it.listPenilaian as List<ListPenilaianItem>
+            val penilaian : Map<String, List<ListPenilaianItem>> = listPenilaian.groupBy {
                 p -> p.date.toString()
             }
-            var date : List<String>  = penilaian.keys.toList()
-//            for (i in 0 .. it.listPenilaian.size) {
-//
-//            } // to do grup berdasarkan tanggalnya
-
+            val date : List<String>  = penilaian.keys.toList()
             val adapter = PenilaianAdapter(this, date, penilaian)
             binding.listPenilaian.setAdapter(adapter)
         }
+
+        penilaianViewModel.snackbarText().observe(this) {
+            it.getContentIfNotHandled()?.let { snackBarText ->
+                Toast.makeText(
+                    this,
+                    snackBarText,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        penilaianViewModel.progressBar().observe(this) {
+            showProgressBar(it)
+        }
+    }
+
+    private fun showProgressBar(status : Boolean) {
+        binding.progressBar.visibility = if (status) View.VISIBLE else View.GONE
     }
 
     companion object{

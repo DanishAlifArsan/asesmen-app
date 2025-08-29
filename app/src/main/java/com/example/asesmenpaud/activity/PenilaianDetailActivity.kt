@@ -12,9 +12,6 @@ import com.example.asesmenpaud.R
 import com.example.asesmenpaud.data.ListPenilaianItem
 import com.example.asesmenpaud.databinding.ActivityAnakDetailBinding
 import com.example.asesmenpaud.databinding.ActivityPenilaianDetailBinding
-import com.example.asesmenpaud.viewmodel.AnakViewModel
-import com.example.asesmenpaud.viewmodel.PenilaianViewModel
-
 class PenilaianDetailActivity : AppCompatActivity() {
     private lateinit var binding : ActivityPenilaianDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {

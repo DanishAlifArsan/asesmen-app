@@ -10,12 +10,9 @@ import android.widget.BaseExpandableListAdapter
 import android.widget.PopupMenu
 import androidx.appcompat.app.AlertDialog
 import com.example.asesmenpaud.R
-import com.example.asesmenpaud.activity.AnakDetailActivity
-import com.example.asesmenpaud.activity.ClassDetailActivity
 import com.example.asesmenpaud.activity.PenilaianCreateActivity
 import com.example.asesmenpaud.activity.PenilaianDetailActivity
 import com.example.asesmenpaud.data.ListPenilaianItem
-import com.example.asesmenpaud.databinding.ClassListBinding
 import com.example.asesmenpaud.databinding.PenilaianListBinding
 import com.example.asesmenpaud.databinding.TanggalListBinding
 
@@ -110,7 +107,7 @@ class PenilaianAdapter(
         return when (item.itemId) {
             R.id.action_edit -> {
                 val i = Intent(ctx, PenilaianCreateActivity::class.java)
-                i.putExtra(PenilaianCreateActivity.PENILAIAN_KEY, penilaian)
+                i.putExtra(PenilaianCreateActivity.EDIT_PENILAIAN_KEY, penilaian)
                 ctx.startActivity(i)
                 true
             }

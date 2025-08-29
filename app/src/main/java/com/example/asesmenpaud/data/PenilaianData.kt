@@ -4,12 +4,12 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 data class PenilaianData(
-    val listPenilaian: List<ListPenilaianItem> = emptyList(),
+    val listPenilaian: List<ListPenilaianItem?> = emptyList(),
 )
 
 @Parcelize
 data class ListPenilaianItem(
-    val id : Int,
+    var id : String? = null,
     val desc : String? = null,
     val photoUrl : String? = null,
     val date : String? = null,

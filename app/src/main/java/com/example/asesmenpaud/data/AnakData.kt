@@ -16,4 +16,5 @@ data class ListAnakItem(
     val weight : Int? = null,
     val height : Int? = null,
     val listPenilaian : List<ListPenilaianItem> = emptyList(),
+    val classId : Int? = 0,
 ) : Parcelable

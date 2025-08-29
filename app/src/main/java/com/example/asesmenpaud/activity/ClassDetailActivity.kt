@@ -46,15 +46,7 @@ class ClassDetailActivity : AppCompatActivity() {
 
     private fun showAnak(classId : Int) {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-
-//        val storyViewModel = obtainViewModel(this@MainActivity)
         anakViewModel.getAllAnak(classId).observe(this) {
-//            Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-//            if (it.error == false) {
-//                val adapter = StoryAdapter()
-//                adapter.submitList(it.listStory.sortedByDescending { it.createdAt} )
-//                binding.recyclerView.adapter = adapter
-//            }
             val adapter = AnakAdapter()
             adapter.submitList(it.listAnak)
             binding.recyclerView.adapter = adapter
